@@ -36,10 +36,10 @@ export default function Overlay({ scrollYProgress }: { scrollYProgress: any }) {
                 className="absolute inset-0 flex items-center justify-start p-8 md:p-24"
             >
                 <div className="max-w-4xl">
-                    <h2 className="text-6xl md:text-8xl font-bold leading-tight font-outfit">
+                    <h2 className="text-2xl md:text-3xl font-bold leading-tight font-outfit">
                         I am a <br />
-                        <span className="text-blue-500 font-playfair italic">Photographer</span> <br />
-                        <span className="text-white">&</span> <span className="text-purple-500 font-playfair italic">Videographer</span>.
+                        <span className="text-zinc-500 font-playfair italic whitespace-nowrap">Photographer</span> <br />
+                        <span className="text-white">&</span> <span className="text-zinc-500 font-playfair italic whitespace-nowrap">Videographer</span>.
                     </h2>
                 </div>
             </motion.div>
@@ -50,7 +50,7 @@ export default function Overlay({ scrollYProgress }: { scrollYProgress: any }) {
                 className="absolute inset-0 flex items-center justify-end p-8 md:p-24 text-right"
             >
                 <div className="max-w-4xl">
-                    <h2 className="text-6xl md:text-8xl font-bold leading-tight font-outfit">
+                    <h2 className="text-6xl md:text-3xl font-bold leading-tight font-outfit">
                         Practised in <br />
                         <span className="text-zinc-500 font-playfair italic whitespace-nowrap">Photoshop</span>, <br />
                         <span className="text-zinc-400 font-playfair italic whitespace-nowrap">Capcut</span> <br />
