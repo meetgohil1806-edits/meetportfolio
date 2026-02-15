@@ -43,7 +43,7 @@ const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = []
         return item;
     });
 
-    const papers = [...(optimizedItems || [])].slice(0, maxItems);
+    const papers: React.ReactNode[] = [...(optimizedItems || [])].slice(0, maxItems);
     while (papers.length < maxItems) {
         papers.push(null);
     }
