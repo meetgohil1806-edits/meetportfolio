@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: #000000;
+  /* Jet Black */
+  --foreground: #C7C9CC;
+  /* Cold Silver White - Default text */
+
+  /* Palette */
+  --color-jet-black: #000000;
+  --color-charcoal-black: #0F0F12;
+  --color-gunmetal-gray: #2B2E34;
+  --color-steel-silver: #8A8D91;
+  --color-cold-silver-white: #C7C9CC;
+  --color-deep-blood-red: #6B0F14;
+  --color-crimson-red: #A3121A;
+  --color-dark-maroon: #3B0A0D;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-jet-black: var(--color-jet-black);
+  --color-charcoal-black: var(--color-charcoal-black);
+  --color-gunmetal-gray: var(--color-gunmetal-gray);
+  --color-steel-silver: var(--color-steel-silver);
+  --color-cold-silver-white: var(--color-cold-silver-white);
+  --color-deep-blood-red: var(--color-deep-blood-red);
+  --color-crimson-red: var(--color-crimson-red);
+  --color-dark-maroon: var(--color-dark-maroon);
+
+  --font-sans: var(--font-inter);
+  --font-outfit: var(--font-outfit);
+  --font-playfair: var(--font-playfair);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
