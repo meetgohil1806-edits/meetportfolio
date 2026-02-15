@@ -30,9 +30,9 @@ const TESTIMONIALS = [
   },
   {
     quote: "Plays role of Leader doing Team managment and delivering projects on time ",
-    name: "Yash Chandurkar",
-    role: "Hod Social Media- CIIE",
-    initials: "YC",
+    name: "Pooja Mishra",
+    role: "Joint Secretary- CIIE",
+    initials: "PM",
   },
   {
     quote: "What I love most is how you always make the person the main character. Every edit feels personal, like the frame is built around the soul of the moment.",
