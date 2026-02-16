@@ -78,7 +78,7 @@ export default function Contact() {
 
               <div className="flex items-center gap-4">
                 {/* <SocialLink href="https://github.com/fawaz-v" icon={<GithubIcon />} label="GitHub" /> */}
-                <SocialLink href="https://www.linkedin.com/in/meet-gohil-0a9260361?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" icon={<LinkedinIcon />} label="LinkedIn" />
+                <SocialLink href="https://www.linkedin.com/in/meet-gohil-0a9260361" icon={<LinkedinIcon />} label="LinkedIn" />
                 <SocialLink href="https://www.instagram.com/__meetgohil__?utm_source=qr&igsh=ZjhocDR2bzU5aDVk" icon={<InstagramIcon />} label="Instagram" />
               </div>
             </div>

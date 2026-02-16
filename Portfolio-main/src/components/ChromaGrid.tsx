@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 import './ChromaGrid.css';
 
 interface ChromaGridItem {
@@ -249,7 +250,13 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
                                 className="chroma-video"
                             />
                         ) : (
-                            <img src={c.image} alt={c.title} loading="lazy" />
+                            <Image
+                                src={c.image}
+                                alt={c.title}
+                                width={600}
+                                height={400}
+                                className="object-cover w-full h-full"
+                            />
                         )}
                     </div>
                 </article>

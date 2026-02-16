@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import ChromaGrid from "@/components/ChromaGrid";
+import Image from "next/image";
 
 import Skills from "@/components/Skills";
 import Timeline from "@/components/Timeline";
@@ -233,7 +234,7 @@ export default function Home() {
           label="Act in Reel"
           className="custom-folder"
           items={[
-            <video key="1" src="/Act in Reel.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />,
+            <video key="1" src="/Act in Reel.mp4" autoPlay loop muted playsInline preload="metadata" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />,
           ]}
         />
         <Folder
@@ -242,10 +243,10 @@ export default function Home() {
           label="Achievement"
           className="custom-folder"
           items={[
-            <img key="1" src="/a1.jpeg" alt="Project A1" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
-            <img key="2" src="/a2.jpeg" alt="Project A2" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
-            <img key="3" src="/a3.jpeg" alt="Project A3" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
-            <img key="4" src="/a4.jpeg" alt="Project A4" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />
+            <Image key="1" src="/a1.jpeg" alt="Project A1" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
+            <Image key="2" src="/a2.jpeg" alt="Project A2" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
+            <Image key="3" src="/a3.jpeg" alt="Project A3" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
+            <Image key="4" src="/a4.jpeg" alt="Project A4" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />
           ]}
         />
         <Folder
@@ -254,10 +255,10 @@ export default function Home() {
           label="2d/3d Animation"
           className="custom-folder"
           items={[
-            <video key="1" src="/mm1.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
-            <video key="2" src="/mm2.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
-            <img key="3" src="/mm3.png" alt="Project MM3" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
-            <img key="4" src="/mm4.png" alt="Project MM4" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />
+            <video key="1" src="/mm1.mp4" autoPlay loop muted playsInline preload="metadata" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
+            <video key="2" src="/mm2.mp4" autoPlay loop muted playsInline preload="metadata" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
+            <Image key="3" src="/mm3.png" alt="Project MM3" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
+            <Image key="4" src="/mm4.png" alt="Project MM4" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />
           ]}
         />
       </div>
@@ -306,6 +307,7 @@ export default function Home() {
                 loop
                 playsInline
                 controls
+                preload="metadata"
                 onPlay={handlePodcastPlay}
                 onPause={() => setIsPodcastPlaying(false)}
                 className={`w-full h-auto object-contain rounded-2xl shadow-xl transition-all duration-200 hover:grayscale-0 ${isPodcastPlaying ? 'grayscale-0' : 'grayscale'}`}
@@ -330,6 +332,7 @@ export default function Home() {
                 loop
                 playsInline
                 controls
+                preload="metadata"
                 onPlay={handleAdsPlay}
                 onPause={() => setIsAdsPlaying(false)}
                 className={`w-full h-auto object-contain rounded-2xl shadow-xl transition-all duration-200 hover:grayscale-0 ${isAdsPlaying ? 'grayscale-0' : 'grayscale'}`}
@@ -350,7 +353,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="block rounded-2xl overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
-                <img src="/m1.jpeg" alt="BTS 1" className="w-full h-auto object-contain" />
+                <Image src="/m1.jpeg" alt="BTS 1" width={400} height={300} className="w-full h-auto object-contain" />
               </a>
               <a
                 href="https://drive.google.com/file/d/1UT-SSYkX1M2VMK4dIlIMbF9qgxrjVM7y/view?usp=drivesdk"
@@ -358,7 +361,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="block rounded-2xl overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
-                <img src="/m2.jpeg" alt="BTS 2" className="w-full h-auto object-contain" />
+                <Image src="/m2.jpeg" alt="BTS 2" width={400} height={300} className="w-full h-auto object-contain" />
               </a>
             </div>
           </ScrollStackItem>
@@ -382,6 +385,7 @@ export default function Home() {
                     loop
                     playsInline
                     autoPlay
+                    preload="metadata"
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 flex items-center justify-center">

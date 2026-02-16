@@ -2,6 +2,7 @@
 
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, Geometry } from 'ogl';
 import { useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 
 import './CircularGallery.css';
 
@@ -264,7 +265,7 @@ class Media {
             this.video.loop = true;
             this.video.playsInline = true;
             this.video.crossOrigin = 'anonymous';
-            this.video.preload = 'none';
+            this.video.preload = 'metadata';
             this.video.muted = true;
             this.video.playsInline = true;
 
@@ -699,14 +700,16 @@ export default function CircularGallery({
                                 src={selectedItem.image}
                                 autoPlay
                                 controls
+                                preload="metadata"
                                 className="w-full h-full object-contain"
                                 onClick={(e) => e.stopPropagation()}
                             />
                         ) : (
-                            <img
+                            <NextImage
                                 src={selectedItem.image}
                                 alt={selectedItem.text}
-                                className="w-full h-full object-contain"
+                                fill
+                                className="object-contain"
                                 onClick={(e) => e.stopPropagation()}
                             />
                         )}

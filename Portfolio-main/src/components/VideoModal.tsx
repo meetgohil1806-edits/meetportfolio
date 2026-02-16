@@ -72,6 +72,7 @@ const VideoModal: React.FC<VideoModalProps> = ({ src, onClose }) => {
                     src={src}
                     controls
                     autoPlay
+                    preload="metadata"
                     style={{
                         maxWidth: '100%',
                         maxHeight: '85vh',

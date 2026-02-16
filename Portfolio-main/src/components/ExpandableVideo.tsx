@@ -39,6 +39,7 @@ export default function ExpandableVideo({ src, className = '' }: ExpandableVideo
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300 rounded-3xl flex items-center justify-center">
                     <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity bg-black/50 px-4 py-2 rounded-full text-sm">
@@ -70,6 +71,7 @@ export default function ExpandableVideo({ src, className = '' }: ExpandableVideo
                                 controls
                                 loop
                                 playsInline
+                                preload="metadata"
                             />
                             <button
                                 onClick={toggleExpand}

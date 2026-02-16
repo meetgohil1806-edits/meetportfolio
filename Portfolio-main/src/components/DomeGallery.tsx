@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
+import NextImage from 'next/image';
 import './DomeGallery.css';
 
 type ImageItem = string | { src: string; alt?: string };
@@ -768,7 +769,14 @@ export default function DomeGallery({
                                     onClick={onTileClick}
                                     onPointerUp={onTilePointerUp}
                                 >
-                                    <img src={it.src} draggable={false} alt={it.alt} />
+                                    <NextImage
+                                        src={it.src}
+                                        draggable={false}
+                                        alt={it.alt}
+                                        fill
+                                        sizes="200px"
+                                        className="object-cover"
+                                    />
                                 </div>
                             </div>
                         ))}

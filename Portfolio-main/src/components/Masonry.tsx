@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import NextImage from 'next/image';
 import './Masonry.css';
 
 if (typeof window !== 'undefined') {
@@ -316,7 +316,14 @@ const Masonry: React.FC<MasonryProps> = ({
                             onMouseLeave={e => handleMouseLeave(e, item)}
                             style={{ width: item.w, height: item.h, left: 0, top: 0, position: 'absolute' }}
                         >
-                            <div className="item-img" style={{ backgroundImage: `url(${item.img})` }}>
+                            <div className="item-img relative overflow-hidden rounded-lg">
+                                <NextImage
+                                    src={item.img}
+                                    alt="Masonry item"
+                                    fill
+                                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 20vw"
+                                    className="object-cover"
+                                />
                                 {colorShiftOnHover && (
                                     <div
                                         className="color-overlay"
@@ -352,9 +359,12 @@ const Masonry: React.FC<MasonryProps> = ({
                 >
                     <button className="masonry-modal-close" onClick={closeLightbox}>&times;</button>
                     {selectedItem && (
-                        <img
+                        <NextImage
                             src={getColorUrl(selectedItem.img)}
                             alt="Masonry highlight"
+                            width={1200}
+                            height={800}
+                            className="max-w-full max-h-[90vh] object-contain"
                         />
                     )}
                 </div>
