@@ -29,7 +29,7 @@ const PACKAGES = [
         border: "group-hover:border-purple-500/50",
     },
     {
-        title: "Video Editin",
+        title: "Video Editing",
         description: "Turning raw footage into engaging, polished content.",
         price: "Starting at ₹3,500",
         features: [

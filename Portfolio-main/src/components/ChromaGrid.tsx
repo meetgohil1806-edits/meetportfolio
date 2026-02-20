@@ -43,7 +43,6 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
     const [playingVideoIndex, setPlayingVideoIndex] = useState<number | null>(null);
     const [coloredCards, setColoredCards] = useState<Set<number>>(new Set());
     const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-    const [selectedVideo, setSelectedVideo] = useState<ChromaGridItem | null>(null);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const fadeRef = useRef<HTMLDivElement>(null);
     const setX = useRef<((value: number) => void) | null>(null);
@@ -110,7 +109,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
 
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') setSelectedVideo(null);
+            // Modal removed
         };
         window.addEventListener('keydown', handleEsc);
         return () => window.removeEventListener('keydown', handleEsc);
@@ -157,46 +156,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
     };
 
     const handleCardClick = (item: ChromaGridItem, index: number) => {
-        if (item.type === 'video') {
-            const videoElement = videoRefs.current[index];
-
-            // Toggle color/grayscale
-            setColoredCards(prev => {
-                const newSet = new Set(prev);
-                if (newSet.has(index)) {
-                    newSet.delete(index);
-                } else {
-                    newSet.add(index);
-                }
-                return newSet;
-            });
-
-            // Handle video play/pause
-            if (videoElement) {
-                if (playingVideoIndex === index) {
-                    // Pause the currently playing video
-                    videoElement.pause();
-                    setPlayingVideoIndex(null);
-                } else {
-                    // Pause all other videos first
-                    videoRefs.current.forEach((video, i) => {
-                        if (video && i !== index) {
-                            video.pause();
-                        }
-                    });
-
-                    // Play the clicked video
-                    videoElement.play();
-                    setPlayingVideoIndex(index);
-                }
-            }
-
-            // Also open in modal
-            setSelectedVideo(item);
-            return;
-        }
-
-        if (item.url) {
+        if (item.url && item.url !== '#') {
             window.open(item.url, '_blank', 'noopener,noreferrer');
         }
     };
@@ -263,32 +223,6 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             ))}
             <div className="chroma-overlay" />
             <div ref={fadeRef} className="chroma-fade" />
-
-            {/* Video Modal */}
-            {selectedVideo && (
-                <div
-                    className="chromax-modal-overlay"
-                    onClick={() => setSelectedVideo(null)}
-                >
-                    <button
-                        className="chromax-modal-close"
-                        onClick={() => setSelectedVideo(null)}
-                    >
-                        &times;
-                    </button>
-                    <div
-                        className="chromax-modal-content"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <video
-                            src={selectedVideo.image}
-                            autoPlay
-                            controls
-                            className="modal-video"
-                        />
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

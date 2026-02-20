@@ -10,6 +10,7 @@ interface GalleryItem {
     image: string;
     text: string;
     type?: 'image' | 'video';
+    url?: string;
 }
 
 interface CircularGalleryProps {
@@ -659,7 +660,6 @@ export default function CircularGallery({
     scrollEase = 0.05
 }: CircularGalleryProps) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -671,7 +671,11 @@ export default function CircularGallery({
             font,
             scrollSpeed,
             scrollEase,
-            onItemClick: (item: GalleryItem) => setSelectedItem(item)
+            onItemClick: (item: GalleryItem) => {
+                if (item.url && item.url !== '#') {
+                    window.open(item.url, '_blank', 'noopener,noreferrer');
+                }
+            }
         });
         return () => {
             app.destroy();
@@ -681,47 +685,6 @@ export default function CircularGallery({
     return (
         <div className="circular-gallery-wrapper w-full h-full relative">
             <div className="circular-gallery" ref={containerRef} />
-
-            {selectedItem && (
-                <div
-                    className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/95 backdrop-blur-xl animate-in fade-in duration-300"
-                    onClick={() => setSelectedItem(null)}
-                >
-                    <button
-                        className="absolute top-8 right-8 text-white/50 hover:text-white text-4xl p-4 transition-colors z-[2010]"
-                        onClick={() => setSelectedItem(null)}
-                    >
-                        ×
-                    </button>
-
-                    <div className="relative w-full max-w-5xl aspect-video md:aspect-[21/9] bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10 mx-4">
-                        {selectedItem.image.endsWith('.mp4') ? (
-                            <video
-                                src={selectedItem.image}
-                                autoPlay
-                                controls
-                                preload="metadata"
-                                className="w-full h-full object-contain"
-                                onClick={(e) => e.stopPropagation()}
-                            />
-                        ) : (
-                            <NextImage
-                                src={selectedItem.image}
-                                alt={selectedItem.text}
-                                fill
-                                className="object-contain"
-                                onClick={(e) => e.stopPropagation()}
-                            />
-                        )}
-                        {/* Modal title removed for a cleaner look if requested, 
-                            but keeping it here for now as the screenshot focused on the gallery. 
-                            If the user wants it gone from the modal too, I can remove it. */}
-                        {/* <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                            <h3 className="text-white text-3xl font-bold font-outfit">{selectedItem.text}</h3>
-                        </div> */}
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

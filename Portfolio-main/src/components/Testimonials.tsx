@@ -23,7 +23,7 @@ const TESTIMONIALS = [
     initials: "AM",
   },
   {
-    quote: "Meet your editin helps in winning our short film festival",
+    quote: "Meet your editing helps in winning our short film festival",
     name: "Driti Shinde",
     role: "Actress-Choreographer",
     initials: "DS",

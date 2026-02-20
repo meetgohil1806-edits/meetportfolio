@@ -20,12 +20,13 @@ import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import VideoModal from "@/components/VideoModal";
 
 export default function Home() {
-  const [isPodcastPlaying, setIsPodcastPlaying] = useState(false);
-  const [isAdsPlaying, setIsAdsPlaying] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
-  const podcastRef = useRef<HTMLVideoElement>(null);
-  const adsRef = useRef<HTMLVideoElement>(null);
+  const upcomingProjects = [
+    { src: '/um1.mp4', url: 'https://drive.google.com/file/d/1P_oIyRs2CoHrNdUWwSIqFuNwkGH69if9/view?usp=drivesdk' },
+    { src: '/um2.mp4', url: 'https://drive.google.com/file/d/1iMffJOux1uoz5UaWVmwkXJ31JYLQkU9D/view?usp=drivesdk' },
+    { src: '/um3.mp4', url: 'https://drive.google.com/file/d/1Z0mzCD3iJwb_07YLLCLKRUke12dWBFAK/view?usp=drivesdk' },
+  ];
 
   useEffect(() => {
     // Force scroll to top on refresh and handle scroll restoration
@@ -37,46 +38,24 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            const video = entry.target as HTMLVideoElement;
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(() => { });
+          } else {
             video.pause();
             video.currentTime = 0;
-            if (video === podcastRef.current) setIsPodcastPlaying(false);
-            if (video === adsRef.current) setIsAdsPlaying(false);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
-    if (podcastRef.current) observer.observe(podcastRef.current);
-    if (adsRef.current) observer.observe(adsRef.current);
+    // Observe all videos with the 'scroll-reset-video' class
+    const videos = document.querySelectorAll('.scroll-reset-video');
+    videos.forEach((video) => observer.observe(video));
 
     return () => observer.disconnect();
   }, []);
-
-  const handlePodcastPlay = () => {
-    setIsPodcastPlaying(true);
-    if (adsRef.current) adsRef.current.pause();
-  };
-
-  const handleAdsPlay = () => {
-    setIsAdsPlaying(true);
-    if (podcastRef.current) podcastRef.current.pause();
-  };
-
-  const handleActiveItemChange = (index: number) => {
-    if (index !== 0 && podcastRef.current) {
-      podcastRef.current.pause();
-      podcastRef.current.currentTime = 0;
-      setIsPodcastPlaying(false);
-    }
-    if (index !== 1 && adsRef.current) {
-      adsRef.current.pause();
-      adsRef.current.currentTime = 0;
-      setIsAdsPlaying(false);
-    }
-  };
 
   const masonryItems = [
     { id: "1", img: "/p1.jpg", url: "#", height: 400 },
@@ -120,17 +99,17 @@ export default function Home() {
   ];
 
   const galleryItems = [
-    { image: "/e1.mp4", text: "Project e1" },
-    { image: "/e2.mp4", text: "Project e2" },
-    { image: "/e3.mp4", text: "Project e3" },
-    { image: "/e4.mp4", text: "Project e4" },
-    { image: "/e5.mp4", text: "Project e5" },
-    { image: "/e6.mp4", text: "Project e6" },
-    { image: "/e7.mp4", text: "Project e7" },
-    { image: "/e8.mp4", text: "Project e8" },
-    { image: "/e9.mp4", text: "Project e9" },
-    { image: "/e10.mp4", text: "Project e10" },
-    { image: "/e11.mp4", text: "Project e11" },
+    { image: "/e1.mp4", text: "Project e1", url: "https://drive.google.com/file/d/15UEajZ_Qis-FLyk2Q2BEf1_xtzNkc2Fd/view?usp=drivesdk" },
+    { image: "/e2.mp4", text: "Project e2", url: "https://drive.google.com/file/d/1ZuyLgUu_HGhMwOIpC50_2iFR4HWl7ffr/view?usp=drivesdk" },
+    { image: "/e3.mp4", text: "Project e3", url: "https://drive.google.com/file/d/1WWw25tH6v20kPFq2B9EpQRuRdc8nZJGq/view?usp=drivesdk" },
+    { image: "/e4.mp4", text: "Project e4", url: "https://drive.google.com/file/d/1iIDzM69p8T2xrGnweP_HZGBv4XkK0-eA/view?usp=drivesdk" },
+    { image: "/e5.mp4", text: "Project e5", url: "https://drive.google.com/file/d/1lLI_FPEQwOv-rpVhkJydSF4VHKS84iZj/view?usp=drivesdk" },
+    { image: "/e6.mp4", text: "Project e6", url: "https://drive.google.com/file/d/1SCNI6IAEjj9iFVNQBy9mSsI3kqoBnqxu/view?usp=drivesdk" },
+    { image: "/e7.mp4", text: "Project e7", url: "https://drive.google.com/file/d/10uatyvSmDutQURLu6QczYbeeqx8QFNdb/view?usp=drivesdk" },
+    { image: "/e8.mp4", text: "Project e8", url: "https://drive.google.com/file/d/1uMfIg3_ycxshEY1fgRsjVILYaTl2hfCM/view?usp=drivesdk" },
+    { image: "/e9.mp4", text: "Project e9", url: "https://drive.google.com/file/d/1RTQ3vld6L7mQhmmsgO9dVPZat-OCe38t/view?usp=drivesdk" },
+    { image: "/e10.mp4", text: "Project e10", url: "https://drive.google.com/file/d/1_7V7kni195LlKYjaxwTtF315yvZG2P3A/view?usp=drivesdk" },
+    { image: "/e11.mp4", text: "Project e11", url: "https://drive.google.com/file/d/1MNdf4oe_Nx3vPC-N65-0Ldszqnhor6oF/view?usp=drivesdk" },
   ];
 
   const items = [
@@ -141,7 +120,7 @@ export default function Home() {
       handle: "@meetgohil",
       borderColor: "#3B82F6",
       gradient: "linear-gradient(145deg, #3B82F6, #000)",
-      url: "#",
+      url: "https://drive.google.com/file/d/1XhDF0dpEFbhvfagIYCFYW87VXebym3iU/view?usp=drivesdk",
       type: 'video' as const
     },
     {
@@ -151,7 +130,7 @@ export default function Home() {
       handle: "@creative",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "#",
+      url: "https://drive.google.com/file/d/1IBuQJYTmgEq9VmhWc6uLJAjPXL2HG3MC/view?usp=drivesdk",
       type: 'video' as const
     },
     {
@@ -161,7 +140,7 @@ export default function Home() {
       handle: '@visuals',
       borderColor: '#F59E0B',
       gradient: 'linear-gradient(165deg, #F59E0B, #000)',
-      url: '#',
+      url: 'https://drive.google.com/file/d/1JAfdVM4DMeOnnJpFBrHvMo6NO9SEtgdV/view?usp=drivesdk',
       type: 'video' as const
     },
     {
@@ -171,7 +150,7 @@ export default function Home() {
       handle: '@editflow',
       borderColor: '#EF4444',
       gradient: 'linear-gradient(195deg, #EF4444, #000)',
-      url: '#',
+      url: 'https://drive.google.com/file/d/1G3a7n0oBW8ugMEcCAHLkX52_8WzIDQ-Z/view?usp=drivesdk',
       type: 'video' as const
     },
     {
@@ -181,7 +160,7 @@ export default function Home() {
       handle: '@fashion',
       borderColor: '#8B5CF6',
       gradient: 'linear-gradient(225deg, #8B5CF6, #000)',
-      url: '#',
+      url: 'https://drive.google.com/file/d/1fLPta--Bs8rlgjBRro1fWef1qKtrfz_2/view?usp=drivesdk',
       type: 'video' as const
     },
     {
@@ -191,7 +170,7 @@ export default function Home() {
       handle: '@filmworks',
       borderColor: '#06B6D4',
       gradient: 'linear-gradient(135deg, #06B6D4, #000)',
-      url: '#',
+      url: 'https://drive.google.com/file/d/1g9BCwEj9739-TN5n_d5-_FbYrC_xeqf9/view?usp=drivesdk',
       type: 'video' as const
     }
   ];
@@ -232,6 +211,7 @@ export default function Home() {
           size={2}
           color="#777777"
           label="Act in Reel"
+          url="https://drive.google.com/file/d/1ad0OM8ozK3BapSAvljL1mXuV1HtiGHYd/view?usp=drivesdk"
           className="custom-folder"
           items={[
             <video key="1" src="/Act in Reel.mp4" autoPlay loop muted playsInline preload="metadata" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />,
@@ -241,6 +221,7 @@ export default function Home() {
           size={2}
           color="#777777"
           label="Achievement"
+          url="https://drive.google.com/drive/folders/1rQ8xBP5AkLcZ9nPqy-sWQsAHtpaCEw5n"
           className="custom-folder"
           items={[
             <Image key="1" src="/a1.jpeg" alt="Project A1" width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
@@ -253,6 +234,7 @@ export default function Home() {
           size={2}
           color="#777777"
           label="2d/3d Animation"
+          url="https://drive.google.com/drive/folders/1mR2b_AqpzU6z2ImTUWaRbF_EDUhblsNF"
           className="custom-folder"
           items={[
             <video key="1" src="/mm1.mp4" autoPlay loop muted playsInline preload="metadata" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', padding: '8px', borderRadius: '4px' }} />,
@@ -286,7 +268,6 @@ export default function Home() {
           itemStackDistance={20}
           stackPosition="20%"
           useWindowScroll={false}
-          onActiveItemChange={handleActiveItemChange}
         >
           <ScrollStackItem itemClassName="bg-white flex flex-col md:flex-row items-center gap-8 overflow-hidden">
             <div className="flex-1 p-8 md:p-12">
@@ -301,17 +282,22 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full md:w-[45%] flex items-center justify-center bg-gray-50 p-4 md:pr-12">
-              <video
-                ref={podcastRef}
-                src="/podcast.mp4"
-                loop
-                playsInline
-                controls
-                preload="metadata"
-                onPlay={handlePodcastPlay}
-                onPause={() => setIsPodcastPlaying(false)}
-                className={`w-full h-auto object-contain rounded-2xl shadow-xl transition-all duration-200 hover:grayscale-0 ${isPodcastPlaying ? 'grayscale-0' : 'grayscale'}`}
-              />
+              <a
+                href="https://drive.google.com/file/d/1VK2tw5pJoQeLlm4dD8peh-LMTzNo3jBb/view?usp=drivesdk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full block group relative cursor-pointer overflow-hidden rounded-2xl shadow-xl"
+              >
+                <video
+                  src="/podcast.mp4"
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="scroll-reset-video w-full h-auto object-contain transition-all duration-300 transform group-hover:scale-105 grayscale group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-300" />
+              </a>
             </div>
           </ScrollStackItem>
           <ScrollStackItem itemClassName="bg-neutral-900 border border-neutral-800 text-white flex flex-col md:flex-row items-center gap-8 overflow-hidden">
@@ -326,17 +312,22 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full md:w-[45%] flex items-center justify-center bg-transparent p-4 md:pr-12">
-              <video
-                ref={adsRef}
-                src="/LLF Ads.mp4"
-                loop
-                playsInline
-                controls
-                preload="metadata"
-                onPlay={handleAdsPlay}
-                onPause={() => setIsAdsPlaying(false)}
-                className={`w-full h-auto object-contain rounded-2xl shadow-xl transition-all duration-200 hover:grayscale-0 ${isAdsPlaying ? 'grayscale-0' : 'grayscale'}`}
-              />
+              <a
+                href="https://drive.google.com/file/d/10d8MQ4gxCnF5G3CYEv1RPmh8oIwUXVrx/view?usp=drivesdk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full block group relative cursor-pointer overflow-hidden rounded-2xl shadow-xl"
+              >
+                <video
+                  src="/LLF Ads.mp4"
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="scroll-reset-video w-full h-auto object-contain transition-all duration-300 transform group-hover:scale-105 grayscale group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-300" />
+              </a>
             </div>
           </ScrollStackItem>
           <ScrollStackItem itemClassName="bg-zinc-950 border border-zinc-900 text-white flex flex-col md:flex-row items-center gap-8 overflow-hidden">
@@ -373,29 +364,30 @@ export default function Home() {
               </p>
             </div>
             <div className="w-full flex flex-row justify-center gap-4 p-8 pt-4 overflow-x-auto pb-12">
-              {['/um1.mp4', '/um2.mp4', '/um3.mp4'].map((src, idx) => (
-                <div
+              {upcomingProjects.map((project, idx) => (
+                <a
                   key={idx}
-                  onClick={() => setSelectedVideo(src)}
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="relative group cursor-pointer w-[30%] min-w-[200px] aspect-video rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:scale-105"
                 >
                   <video
-                    src={src}
+                    src={project.src}
                     muted
                     loop
                     playsInline
-                    autoPlay
                     preload="metadata"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="scroll-reset-video w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 flex items-center justify-center">
                     <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
                       <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
+                        <path d="M10 6L10 18L18 12L10 6Z" />
                       </svg>
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </ScrollStackItem>
@@ -409,7 +401,6 @@ export default function Home() {
       <Dock />
       <Contact />
 
-      <VideoModal src={selectedVideo} onClose={() => setSelectedVideo(null)} />
     </main >
   );
 }

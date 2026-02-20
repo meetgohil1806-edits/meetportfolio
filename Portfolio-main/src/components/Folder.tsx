@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Folder.css';
 
 interface FolderProps {
@@ -9,6 +9,7 @@ interface FolderProps {
     items?: React.ReactNode[];
     className?: string;
     label?: string;
+    url?: string;
 }
 
 const darkenColor = (hex: string, percent: number): string => {
@@ -29,9 +30,21 @@ const darkenColor = (hex: string, percent: number): string => {
     return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
 };
 
-const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = [], className = '', label = '' }) => {
+const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = [], className = '', label = '', url }) => {
     const maxItems = 4;
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if (!open) return;
+
+        const handleScroll = () => {
+            setOpen(false);
+            setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [open, maxItems]);
 
     // Optimize videos: Only autoPlay if folder is open
     const optimizedItems = React.Children.map(items, (item) => {
@@ -49,7 +62,6 @@ const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = []
     }
 
     const [paperOffsets, setPaperOffsets] = useState(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
-    const [selectedItem, setSelectedItem] = useState<React.ReactNode | null>(null);
 
     const folderBackColor = darkenColor(color, 0.08);
     const paper1 = darkenColor('#ffffff', 0.1);
@@ -64,9 +76,12 @@ const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = []
     };
 
     const handlePaperClick = (e: React.MouseEvent, item: React.ReactNode) => {
+        if (url && url !== '#') {
+            window.open(url, '_blank', 'noopener,noreferrer');
+            return;
+        }
         if (!open) return;
         e.stopPropagation();
-        setSelectedItem(item);
     };
 
     const handlePaperMouseMove = (e: React.MouseEvent, index: number) => {
@@ -136,40 +151,6 @@ const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = []
                 </div>
             </div>
 
-            {selectedItem && (
-                <div
-                    className="chromax-modal-overlay"
-                    style={{ zIndex: 1000 }}
-                    onClick={() => setSelectedItem(null)}
-                >
-                    <button
-                        className="chromax-modal-close"
-                        onClick={() => setSelectedItem(null)}
-                    >
-                        &times;
-                    </button>
-                    <div
-                        className="chromax-modal-content"
-                        style={{ maxWidth: '90vw', maxHeight: '90vh', backgroundColor: 'transparent', boxShadow: 'none' }}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {React.isValidElement(selectedItem) ?
-                            React.cloneElement(selectedItem as React.ReactElement<any>, {
-                                ...((selectedItem as any).type === 'video' ? { controls: true, autoPlay: true } : {}),
-                                style: {
-                                    maxWidth: '100%',
-                                    maxHeight: '85vh',
-                                    width: 'auto',
-                                    height: 'auto',
-                                    objectFit: 'contain',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
-                                }
-                            }) : selectedItem
-                        }
-                    </div>
-                </div>
-            )}
         </>
     );
 };
