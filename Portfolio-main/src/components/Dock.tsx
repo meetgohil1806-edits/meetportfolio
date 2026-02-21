@@ -18,8 +18,8 @@ const Icons = {
   Code: (props: any) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>
   ),
-  Zap: (props: any) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
+  Camera: (props: any) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></svg>
   ),
   Compass: (props: any) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></svg>
@@ -43,7 +43,7 @@ const DOCK_ITEMS = [
   { id: "projects", icon: Icons.Code, label: "Posters", href: "#projects" },
   { id: "testimonials", icon: Icons.Star, label: "Testimonials", href: "#testimonials" },
   { id: "blog", icon: Icons.BookOpen, label: "Introduction", href: "#blog" },
-  { id: "skills", icon: Icons.Zap, label: "Skills", href: "#skills" },
+  { id: "skills", icon: Icons.Camera, label: "Skills", href: "#skills" },
   { id: "journey", icon: Icons.Compass, label: "Journey", href: "#journey" },
   { id: "contact", icon: Icons.Mail, label: "Contact", href: "#contact" },
   { id: "resume", icon: Icons.FileText, label: "Resume", href: "/resume.pdf", external: true },

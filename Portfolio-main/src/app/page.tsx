@@ -18,6 +18,7 @@ import Folder from "@/components/Folder";
 import Masonry from "@/components/Masonry";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import VideoModal from "@/components/VideoModal";
+import LightRays from "@/components/LightRays";
 
 export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -179,8 +180,20 @@ export default function Home() {
     <main className="min-h-screen bg-black">
       <Hero />
       <Projects />
-      <div style={{ padding: '4rem 2rem 0', backgroundColor: '#000' }}>
-        <h2 style={{ color: 'white', marginBottom: '2rem', fontSize: '2.5rem', fontWeight: 'bold', textAlign: 'center' }}>Videography</h2>
+      <div className="relative pt-8 px-8 pb-0 bg-black overflow-hidden min-h-[200px] flex items-center justify-center">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <LightRays
+            raysOrigin="bottom-center"
+            raysColor="#ffffff"
+            raysSpeed={0.8}
+            lightSpread={1.2}
+            rayLength={1.5}
+            className="header-rays"
+          />
+        </div>
+        <h2 className="relative z-10 text-white mb-8 text-6xl md:text-8xl font-black text-center font-syne tracking-tighter uppercase">
+          Videography
+        </h2>
       </div>
       <div style={{ height: '600px', position: 'relative', backgroundColor: '#000' }}>
         <ChromaGrid
@@ -193,8 +206,20 @@ export default function Home() {
       </div>
 
 
-      <div style={{ padding: '4rem 2rem 0', backgroundColor: '#000' }}>
-        <h2 style={{ color: 'white', marginBottom: '2rem', fontSize: '2.5rem', fontWeight: 'bold', textAlign: 'center' }}>Editing</h2>
+      <div className="relative pt-8 px-8 pb-0 bg-black overflow-hidden min-h-[200px] flex items-center justify-center">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#ffffff"
+            raysSpeed={0.6}
+            lightSpread={1.5}
+            rayLength={1.2}
+            className="header-rays"
+          />
+        </div>
+        <h2 className="relative z-10 text-white mb-8 text-6xl md:text-8xl font-black text-center font-syne tracking-tighter uppercase">
+          Editing
+        </h2>
       </div>
       <div style={{ height: '600px', position: 'relative', backgroundColor: '#000' }}>
         <CircularGallery
@@ -245,9 +270,21 @@ export default function Home() {
         />
       </div>
 
-      <div style={{ padding: '4rem 2rem', backgroundColor: '#000', minHeight: '600px' }}>
-        <h2 style={{ color: 'white', marginBottom: '3rem', fontSize: '2.5rem', fontWeight: 'bold', textAlign: 'center' }}>Photography</h2>
-        <div style={{ width: '100%' }}>
+      <div className="relative pt-8 px-8 bg-black overflow-hidden min-h-[200px] flex flex-col items-center justify-center">
+        <div className="absolute inset-0 z-0 opacity-20">
+          <LightRays
+            raysOrigin="right"
+            raysColor="#ffffff"
+            raysSpeed={0.5}
+            lightSpread={1.0}
+            rayLength={2.0}
+            className="header-rays"
+          />
+        </div>
+        <h2 className="relative z-10 text-white mb-12 text-6xl md:text-8xl font-black text-center font-syne tracking-tighter uppercase">
+          Photography
+        </h2>
+        <div className="w-full relative z-10">
           <Masonry
             items={masonryItems}
             ease="power3.out"
